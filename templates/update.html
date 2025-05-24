@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Task</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>✏️ Update Task</h2>
+        <form method="POST">
+            <input type="text" name="title" value="{{ task.title }}" required>
+            <input type="text" name="description" value="{{ task.description }}" required>
+            <select name="priority" required>
+                <option value="High" {% if task.priority == "High" %}selected{% endif %}>🔥 High</option>
+                <option value="Medium" {% if task.priority == "Medium" %}selected{% endif %}>⚡ Medium</option>
+                <option value="Low" {% if task.priority == "Low" %}selected{% endif %}>🌱 Low</option>
+            </select>
+            <button type="submit">Update</button>
+            <a href="/">⬅ Back</a>
+        </form>
+    </div>
+</body>
+</html>

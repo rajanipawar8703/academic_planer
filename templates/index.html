@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Academic Planner</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📘 Academic Planner</h1>
+        <form method="POST" action="/add">
+            <input type="text" name="title" placeholder="Task Title" required>
+            <input type="text" name="description" placeholder="Task Description" required>
+            <select name="priority" required>
+                <option value="High">🔥 High</option>
+                <option value="Medium">⚡ Medium</option>
+                <option value="Low">🌱 Low</option>
+            </select>
+            <button type="submit">Add Task</button>
+        </form>
+
+        <ul>
+            {% for task in tasks %}
+                <li class="{{ 'completed' if task.completed }}">
+                    <strong>{{ task.title }} ({{ task.priority }})</strong><br>
+                    <span>{{ task.description }}</span><br>
+                    {% if not task.completed %}
+                        <a href="/complete/{{ task.id }}">✅ Complete</a>
+                    {% endif %}
+                    <a href="/update/{{ task.id }}">✏️ Edit</a>
+                    <a href="/delete/{{ task.id }}" onclick="return confirm('Delete this task?')">🗑️ Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
